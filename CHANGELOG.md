@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+### Version 0.4.1, 2020-08-19
+ - Fixed sql script
+ - Changed field in SettlementStatus.cs: Open => Pending
+
 ### Version 0.4.0, 2020-08-05
  - Added 'create_tables' sql script
  - Changed field in Reconciliation.cs: ActionDate => CreationDate
