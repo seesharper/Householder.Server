@@ -2,7 +2,7 @@ namespace Householder.Server.Models
 {
     public enum SettlementStatus
     {
-        Open,
+        Pending,
         Approved,
         Declined
     }
