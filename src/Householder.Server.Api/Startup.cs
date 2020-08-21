@@ -21,6 +21,7 @@ namespace Householder.Server.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // TODO: Use LightInject
             services.AddControllers();
             services.AddDbContext<DbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));

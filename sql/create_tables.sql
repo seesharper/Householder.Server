@@ -12,7 +12,7 @@ SET FOREIGN_KEY_CHECKS=0;
 CREATE TABLE resident
 (
     id INTEGER NOT NULL AUTO_INCREMENT,
-    resident_name VARCHAR(30) NOT NULL,
+    name VARCHAR(30) NOT NULL,
     PRIMARY KEY (id)
 );
 
