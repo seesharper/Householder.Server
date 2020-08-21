@@ -1,13 +1,32 @@
 using System.Threading.Tasks;
+using Householder.Server.DataAccess;
 using Householder.Server.Models;
+using MySqlConnector;
 
 namespace Householder.Server.Commands
 {
-    public class AddResidentCommandHandler : ICommandHandler<AddResidentCommand, Resident>
+    public class AddResidentCommandHandler : ICommandHandler<AddResidentCommand, long>
     {
-        public Task<Resident> Handle(AddResidentCommand command)
+        private MySqlDatabase database;
+
+        public AddResidentCommandHandler(MySqlDatabase database)
         {
-            throw new System.NotImplementedException();
+            this.database = database;
+        }
+
+        public async Task<long> Handle(AddResidentCommand command)
+        {
+            var resident = command.Resident;
+
+            var cmd = database.Connection.CreateCommand();
+
+            cmd.CommandText = @"INSERT INTO `resident` (`name`) VALUES (@name)";
+
+            cmd.Parameters.Add(new MySqlParameter("@name", resident.Name));
+
+            await cmd.ExecuteNonQueryAsync();
+
+            return cmd.LastInsertedId;
         }
     }
 }

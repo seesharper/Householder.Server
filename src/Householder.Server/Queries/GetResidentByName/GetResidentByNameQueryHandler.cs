@@ -1,14 +1,35 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Householder.Server.DataAccess;
 using Householder.Server.Models;
+using MySqlConnector;
 
 namespace Householder.Server.Queries
 {
     public class GetResidentByNameQueryHandler : IQueryHandler<GetResidentByNameQuery, Resident>
     {
-        public Task<Resident> Handle(GetResidentByNameQuery query)
+        private MySqlDatabase database;
+
+        public GetResidentByNameQueryHandler(MySqlDatabase database)
         {
-            throw new System.NotImplementedException();
+            this.database = database;
+        }
+        
+        public async Task<Resident> Handle(GetResidentByNameQuery query)
+        {
+            var name = query.Name;
+
+            var cmd = database.Connection.CreateCommand();
+
+            cmd.CommandText = @"SELECT * FROM `resident` WHERE name=@name";
+
+            cmd.Parameters.Add(new MySqlParameter("@name", name));
+
+            var reader = await cmd.ExecuteReaderAsync();
+
+            await reader.ReadAsync();
+
+            return new Resident(reader.GetString("name"));
         }
     }
 }
