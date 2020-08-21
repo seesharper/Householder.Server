@@ -2,7 +2,7 @@ using Householder.Server.Models;
 
 namespace Householder.Server.Commands
 {
-    public class AddResidentCommand : ICommand<Resident>
+    public class AddResidentCommand : ICommand<long>
     {
         public Resident Resident { get; }
 
