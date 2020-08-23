@@ -22,7 +22,7 @@ namespace Householder.Server.Queries
 
             var cmd = database.Connection.CreateCommand();
 
-            cmd.CommandText = @"SELECT r.name AS resident_name, e.amount, e.transaction_date, e.note, e.status_id FROM `expense` e NATURAL JOIN `resident` r WHERE e.id = @id";
+            cmd.CommandText = @"SELECT r.id, r.name AS resident_name, e.amount, e.transaction_date, e.note, e.status_id FROM `expense` e NATURAL JOIN `resident` r WHERE e.id = @id";
 
             cmd.Parameters.Add(new MySqlParameter("@id", id));
 
@@ -31,6 +31,7 @@ namespace Householder.Server.Queries
             await reader.ReadAsync();
 
             return new Expense(
+                    reader.GetInt32("id"),
                     new Resident(reader.GetString("resident_name")),
                     reader.GetDouble("amount"),
                     reader.GetDateTime("transaction_date"),
