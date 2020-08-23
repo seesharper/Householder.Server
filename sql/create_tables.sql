@@ -28,7 +28,7 @@ CREATE TABLE reconciliation
 CREATE TABLE expense_status
 (
     id INTEGER NOT NULL,
-    status_name VARCHAR(10) NOT NULL,
+    status_name VARCHAR(12) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -50,7 +50,7 @@ CREATE TABLE expense
 CREATE TABLE settlement_status
 (
     id INTEGER NOT NULL,
-    status_name VARCHAR(10) NOT NULL,
+    status_name VARCHAR(12) NOT NULL,
     PRIMARY KEY (id)
 );
 
