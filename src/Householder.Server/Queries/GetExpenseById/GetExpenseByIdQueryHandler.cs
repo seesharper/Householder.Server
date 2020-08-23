@@ -6,40 +6,37 @@ using MySqlConnector;
 
 namespace Householder.Server.Queries
 {
-    public class GetAllExpensesQueryHandler : IQueryHandler<GetAllExpensesQuery, IEnumerable<Expense>>
+    public class GetExpenseByIdQueryHandler : IQueryHandler<GetExpenseByIdQuery, Expense>
     {
         private MySqlDatabase database;
 
-        public GetAllExpensesQueryHandler(MySqlDatabase database)
+        public GetExpenseByIdQueryHandler(MySqlDatabase database)
         {
             this.database = database;
         }
 
-        public async Task<IEnumerable<Expense>> Handle(GetAllExpensesQuery query)
+        public async Task<Expense> Handle(GetExpenseByIdQuery query)
         {
             var results = new List<Expense>();
-            var limit = query.Limit;
+            var id = query.Id;
 
             var cmd = database.Connection.CreateCommand();
 
-            cmd.CommandText = @"SELECT r.name AS resident_name, e.amount, e.transaction_date, e.note, e.status_id FROM `expense` e NATURAL JOIN `resident` r LIMIT @limit;";
+            cmd.CommandText = @"SELECT r.name AS resident_name, e.amount, e.transaction_date, e.note, e.status_id FROM `expense` e NATURAL JOIN `resident` r WHERE e.id = @id";
 
-            cmd.Parameters.Add(new MySqlParameter("@limit", limit));
+            cmd.Parameters.Add(new MySqlParameter("@id", id));
 
             var reader = await cmd.ExecuteReaderAsync();
 
-            while (await reader.ReadAsync())
-            {
-                results.Add(new Expense(
+            await reader.ReadAsync();
+
+            return new Expense(
                     new Resident(reader.GetString("resident_name")),
                     reader.GetDouble("amount"),
                     reader.GetDateTime("transaction_date"),
                     reader.GetString("note"),
                     (ExpenseStatus)reader.GetInt32("status_id")
-                ));
-            }
-
-            return results;
+                );
         }
     }
 }
