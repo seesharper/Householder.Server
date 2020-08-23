@@ -5,6 +5,8 @@ namespace Householder.Server.Models
 {
     public class Expense
     {
+        [JsonProperty("id")]
+        public int ID { get; }
         [JsonProperty("payee")]
         public Resident Payee { get; }
         [JsonProperty("amount")]
@@ -16,9 +18,20 @@ namespace Householder.Server.Models
         [JsonProperty("status")]
         public ExpenseStatus Status { get; }
 
-        [JsonConstructor]
         public Expense(Resident payee, double amount, DateTime date, string note, ExpenseStatus status)
         {
+            ID = -1;
+            Payee = payee;
+            Amount = amount;
+            Date = date;
+            Note = note;
+            Status = status;
+        }
+
+        [JsonConstructor]
+        public Expense(int id, Resident payee, double amount, DateTime date, string note, ExpenseStatus status)
+        {
+            ID = id;
             Payee = payee;
             Amount = amount;
             Date = date;
