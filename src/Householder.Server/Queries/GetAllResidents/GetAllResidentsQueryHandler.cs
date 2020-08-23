@@ -19,13 +19,14 @@ namespace Householder.Server.Queries
             List<Resident> results = new List<Resident>();
             var cmd = database.Connection.CreateCommand();
 
-            cmd.CommandText = @"SELECT * FROM `resident`";
+            cmd.CommandText = @"SELECT id, name FROM `resident`";
 
             var reader = await cmd.ExecuteReaderAsync();
 
             while (await reader.ReadAsync())
             {
                 results.Add(new Resident(
+                    reader.GetInt32("id"),
                     reader.GetString("name")
                 ));
             }

@@ -21,7 +21,7 @@ namespace Householder.Server.Queries
 
             var cmd = database.Connection.CreateCommand();
 
-            cmd.CommandText = @"SELECT * FROM `resident` WHERE name=@name";
+            cmd.CommandText = @"SELECT id, name FROM `resident` WHERE name=@name";
 
             cmd.Parameters.Add(new MySqlParameter("@name", name));
 
@@ -29,7 +29,10 @@ namespace Householder.Server.Queries
 
             await reader.ReadAsync();
 
-            return new Resident(reader.GetString("name"));
+            return new Resident(
+                reader.GetInt32("id"),
+                reader.GetString("name")
+            );
         }
     }
 }
