@@ -4,6 +4,8 @@ namespace Householder.Server.Models
 {
     public class Settlement
     {
+        [JsonProperty("id")]
+        public int ID { get; }
         [JsonProperty("creditor")]
         public Resident Creditor { get; }
         [JsonProperty("debtor")]
@@ -13,9 +15,19 @@ namespace Householder.Server.Models
         [JsonProperty("status")]
         public SettlementStatus Status { get; }
 
-        [JsonConstructor]
         public Settlement(Resident creditor, Resident debtor, double amount, SettlementStatus status)
         {
+            ID = -1;
+            Creditor = creditor;
+            Debtor = debtor;
+            Amount = amount;
+            Status = status;
+        }
+
+        [JsonConstructor]
+        public Settlement(int id, Resident creditor, Resident debtor, double amount, SettlementStatus status)
+        {
+            ID = id;
             Creditor = creditor;
             Debtor = debtor;
             Amount = amount;

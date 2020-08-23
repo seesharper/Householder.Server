@@ -4,12 +4,21 @@ namespace Householder.Server.Models
 {
     public class Resident
     {
+        [JsonProperty("id")]
+        public int ID { get; }
         [JsonProperty("name")]
         public string Name { get; }
 
-        [JsonConstructor]
         public Resident(string name)
         {
+            ID = -1;
+            Name = name;
+        }
+
+        [JsonConstructor]
+        public Resident(int id, string name)
+        {
+            ID = id;
             Name = name;
         }
     }
