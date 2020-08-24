@@ -24,7 +24,7 @@ namespace Householder.Server.Commands
 
             cmd.Parameters.Add(new MySqlParameter("@residentId", expense.Payee.ID));
             cmd.Parameters.Add(new MySqlParameter("@amount", expense.Amount));
-            cmd.Parameters.Add(new MySqlParameter("@transactioNDate", expense.Date));
+            cmd.Parameters.Add(new MySqlParameter("@transactionDate", expense.Date));
             cmd.Parameters.Add(new MySqlParameter("@note", expense.Note));
 
             await cmd.ExecuteNonQueryAsync();
