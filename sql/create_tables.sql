@@ -40,7 +40,7 @@ CREATE TABLE expense
     transaction_date DATETIME NOT NULL,
     note VARCHAR(50) NOT NULL DEFAULT '',
     status_id INTEGER NOT NULL DEFAULT 1,
-    reconciliation_id INTEGER NOT NULL,
+    reconciliation_id INTEGER NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (resident_id) REFERENCES resident(id),
     FOREIGN KEY (status_id) REFERENCES expense_status(id),
