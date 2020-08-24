@@ -2,7 +2,7 @@ using Householder.Server.Models;
 
 namespace Householder.Server.Commands
 {
-    public class AddExpenseCommand : ICommand<Expense>
+    public class AddExpenseCommand : ICommand<long>
     {
         public Expense Expense { get; }
 
