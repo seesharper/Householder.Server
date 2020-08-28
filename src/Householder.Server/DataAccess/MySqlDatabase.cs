@@ -3,7 +3,7 @@ using MySqlConnector;
 
 namespace Householder.Server.DataAccess
 {
-    public class MySqlDatabase : IDisposable
+    public class MySqlDatabase : IMySqlDatabase
     {
         public MySqlConnection Connection { get; }
 

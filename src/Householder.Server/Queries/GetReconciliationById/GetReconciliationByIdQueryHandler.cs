@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+
 using System.Threading.Tasks;
 using Householder.Server.DataAccess;
 using Householder.Server.Models;
@@ -30,10 +30,10 @@ namespace Householder.Server.Queries
             await reader.ReadAsync();
 
             return new Reconciliation(
-                    reader.GetInt32("id"),
-                    new Resident(reader.GetString("creator_name")),
-                    reader.GetDateTime("creation_date")
-                );
+                reader.GetInt32("id"),
+                new Resident(reader.GetString("creator_name")),
+                reader.GetDateTime("creation_date")
+            );
         }
     }
 }
