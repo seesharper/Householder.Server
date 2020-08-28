@@ -12,24 +12,20 @@ namespace Householder.Server.Models
         public Resident Creator { get; }
         [JsonProperty("action_date")]
         public DateTime CreationDate { get; }
-        [JsonProperty("expenses")]
-        public IEnumerable<Expense> Expenses { get; }
 
-        public Reconciliation(Resident creator, DateTime creationDate, IEnumerable<Expense> expenses)
+        public Reconciliation(Resident creator, DateTime creationDate)
         {
             ID = -1;
             Creator = creator;
             CreationDate = creationDate;
-            Expenses = expenses;
         }
 
         [JsonConstructor]
-        public Reconciliation(int id, Resident creator, DateTime creationDate, IEnumerable<Expense> expenses)
+        public Reconciliation(int id, Resident creator, DateTime creationDate)
         {
             ID = id;
             Creator = creator;
             CreationDate = creationDate;
-            Expenses = expenses;
         }
     }
 }
