@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <OutputType>Exe</OutputType>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <InvariantGlobalization>true</InvariantGlobalization>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +14,7 @@
     </PackageReference>
     <PackageReference Include="MysqlConnector" Version="1.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <None Include="runtimeconfig.template.json" CopyToOutputDirectory="Always" />
   </ItemGroup>
 
 </Project>
