@@ -1,3 +1,4 @@
+using LightInject;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,6 +21,11 @@ namespace Householder.Server.Api
         {
             // TODO: Use LightInject
             services.AddControllers();
+        }
+
+        public void ConfigureContainer(IServiceContainer container)
+        {
+            container.RegisterFrom<CompositionRoot>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
