@@ -26,6 +26,10 @@ namespace Householder.Server.Api
         public void ConfigureContainer(IServiceContainer container)
         {
             container.RegisterFrom<CompositionRoot>();
+
+            var options = new ContainerOptions { EnablePropertyInjection = false };
+
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
